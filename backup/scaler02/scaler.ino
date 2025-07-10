@@ -11,12 +11,12 @@ const uint8_t segmentStates[10][7] = {
   {HIGH,HIGH,HIGH,HIGH,LOW,HIGH, HIGH}  // 9
 };
 
-const uint8_t pulsePin = 21;    // pin detecting the TTL pulse
+const uint8_t pulsePin = 11;    // pin detecting the TTL pulse
 volatile int count = 0;        // will range from 0 to 999
 
 const uint8_t segmentPins[3][7] = {
-  {16, 17, 18, 19, 20, 22, 23},  // hundreds digit
-  { 9, 10, 11, 12, 13, 14, 15},  // tens digit
+  {17, 18, 19, 20, 21, 22, 23},  // hundreds digit
+  { 9, 10, 12, 13, 14, 15, 16},  // tens digit
   { 2,  3,  4,  5,  6,  7,  8}    // units digit
 };
 
@@ -29,8 +29,8 @@ void setup() {
     }
   }
    // configure the pulse input
-  pinMode(21, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(pulsePin), onPulse, RISING);
+  pinMode(pulsePin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(pulsePin), onPulse, CHANGE);
 
   // initialize display
   Serial.begin(9600);
